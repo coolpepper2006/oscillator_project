@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Теория — PHYS LAB</title><link rel="stylesheet" href="css/style.css"></head>
+<body><header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">∿</span><span>PHYS<span class="brand-light">LAB</span></span></a><nav class="main-nav"><a href="index.html">Лаборатория</a><a class="active" href="theory.html">Теория</a><a href="calculations.html">Расчёты</a></nav><a class="theme-toggle simple-link" href="index.html#lab">К модели ↗</a></header>
+<main class="page-main"><section class="page-hero"><div class="eyebrow"><span class="eyebrow-dot"></span> ТЕОРЕТИЧЕСКАЯ ЧАСТЬ</div><h1>Физика <span>осциллятора</span></h1><p>Модель описывает движение тела на пружине, сила которой зависит от смещения линейно и нелинейно.</p></section>
+<section class="theory-grid page-cards">
+<article class="theory-card"><span class="theory-number">01</span><h3>Уравнение движения</h3><div class="equation">F(x) = −kx − bx³</div><p>Линейная часть задаётся жёсткостью пружины k, а кубическая часть b учитывает нелинейность при больших смещениях.</p><div class="equation secondary">x′ = v</div><div class="equation secondary">v′ = −αx − βx³</div></article>
+<article class="theory-card"><span class="theory-number">02</span><h3>Начальные условия</h3><div class="equation">x(0) = 0, v(0) = v₀</div><p>В начальный момент тело находится в положении равновесия. Начальная скорость задаёт направление и запас кинетической энергии.</p><div class="small-callout">α = k/m · β = b/m</div></article>
+<article class="theory-card"><span class="theory-number">03</span><h3>Энергия системы</h3><div class="equation">E/m = v²/2 + αx²/2 + βx⁴/4</div><p>Для идеальной системы без потерь удельная механическая энергия сохраняется. Изменение энергии в численном решении показывает погрешность метода.</p></article>
+</section>
+<section class="section-block"><div class="section-heading"><div><div class="section-kicker">ЧИСЛЕННЫЕ МЕТОДЫ</div><h2>Как считается траектория</h2><p>Дифференциальное уравнение решается пошагово с интервалом Δt.</p></div></div>
+<div class="info-list">
+<article class="info-card"><h3>Метод Эйлера</h3><p>Использует текущее значение ускорения. Прост в реализации, но ошибка может быстро накапливаться.</p></article>
+<article class="info-card"><h3>Эйлер — Кромер</h3><p>Сначала обновляет скорость, затем координату. Часто ведёт себя лучше обычного метода Эйлера в задачах колебаний.</p></article>
+<article class="info-card"><h3>Эйлер — Ричардсон</h3><p>Оценивает ускорение в середине шага и использует его для обновления скорости.</p></article>
+<article class="info-card"><h3>Velocity Verlet</h3><p>Учитывает ускорение в начале и конце шага. Хорошо подходит для консервативных механических систем.</p></article>
+</div></section><div class="page-cta"><div><h2>Проверьте теорию на практике</h2><p>Меняйте коэффициенты и сравнивайте графики движения.</p></div><a class="primary-link" href="index.html#lab">Открыть лабораторию ↗</a></div>
+<footer class="footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark">∿</span><span>PHYS<span class="brand-light">LAB</span></span></a><span>Теория нелинейного осциллятора</span><a href="#top">Наверх ↑</a></footer></main></body></html>
