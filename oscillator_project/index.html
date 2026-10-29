@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101828">
+  <title>Нелинейный осциллятор — лаборатория</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="На главную"><span class="brand-mark">∿</span><span>PHYS<span class="brand-light">LAB</span></span></a>
+    <nav class="main-nav" aria-label="Главная навигация"><a class="active" href="#lab">Лаборатория</a><a href="#theory">Теория</a><a href="#results">Результаты</a></nav>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Переключить тему"><span id="themeIcon">☾</span><span class="theme-label">Тема</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> ИНТЕРАКТИВНАЯ ФИЗИЧЕСКАЯ МОДЕЛЬ</div>
+        <h1>Нелинейный<br><span>осциллятор</span></h1>
+        <p class="hero-description">Исследуйте движение тележки на нелинейно-упругой пружине. Меняйте параметры, сравнивайте численные методы и наблюдайте, как меняется энергия системы.</p>
+        <a class="primary-link" href="#lab">Открыть лабораторию <span>↘</span></a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+        <div class="formula-chip chip-a">F(x) = −αx − βx³</div>
+        <div class="formula-chip chip-b">E = const</div>
+        <svg class="spring-art" viewBox="0 0 440 220" role="img" aria-label="Схематичное изображение тележки на пружине">
+          <defs><linearGradient id="cartGrad" x1="0" x2="1"><stop stop-color="#8dd8ff"/><stop offset="1" stop-color="#4e8cff"/></linearGradient><linearGradient id="springGrad" x1="0" x2="1"><stop stop-color="#a4b8d0"/><stop offset=".5" stop-color="#f6fbff"/><stop offset="1" stop-color="#7d95b2"/></linearGradient></defs>
+          <path d="M30 170 H405" stroke="#5f7591" stroke-width="3" stroke-linecap="round"/><path d="M30 181 H405" stroke="#34465f" stroke-width="1" stroke-dasharray="3 8"/>
+          <path d="M35 123 L49 123 L58 105 L72 141 L86 105 L100 141 L114 105 L128 141 L142 105 L156 141 L170 123 L188 123" fill="none" stroke="url(#springGrad)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+          <rect x="188" y="92" width="133" height="66" rx="13" fill="url(#cartGrad)" stroke="#c3eaff" stroke-width="2"/><rect x="202" y="104" width="104" height="7" rx="3.5" fill="#e8f7ff" opacity=".8"/><circle cx="218" cy="164" r="14" fill="#1d3554" stroke="#8ecbff" stroke-width="4"/><circle cx="292" cy="164" r="14" fill="#1d3554" stroke="#8ecbff" stroke-width="4"/>
+          <path d="M340 83 H398 M389 74 L398 83 L389 92" fill="none" stroke="#a8d9ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="350" y="65" fill="#c7e7ff" font-size="12" font-family="Arial">v(t)</text>
+          <circle cx="359" cy="124" r="4" fill="#73d9c0"/><circle cx="379" cy="142" r="2.5" fill="#73d9c0"/><circle cx="344" cy="148" r="2" fill="#73d9c0"/>
+        </svg>
+        <div class="visual-caption"><span class="pulse-dot"></span> МОДЕЛЬ ДВИЖЕНИЯ <span class="caption-line"></span> 1D</div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Ключевые показатели">
+      <article class="metric-card"><div class="metric-icon blue">↔</div><div><span class="metric-label">Максимальное смещение</span><strong id="metricX">—</strong><small>по модулю, x(t)</small></div></article>
+      <article class="metric-card"><div class="metric-icon violet">ϑ</div><div><span class="metric-label">Максимальная скорость</span><strong id="metricV">—</strong><small>по модулю, v(t)</small></div></article>
+      <article class="metric-card"><div class="metric-icon mint">◈</div><div><span class="metric-label">Изменение энергии</span><strong id="metricE">—</strong><small>относительно начальной</small></div></article>
+      <article class="metric-card"><div class="metric-icon amber">⌁</div><div><span class="metric-label">Точек расчёта</span><strong id="metricN">—</strong><small>численное решение</small></div></article>
+    </section>
+
+    <section id="lab" class="workspace section-block">
+      <div class="section-heading"><div><div class="section-kicker">01 / ЭКСПЕРИМЕНТ</div><h2>Настройте модель</h2><p>Измените начальные условия и запустите расчёт.</p></div><div class="status-pill"><span class="pulse-dot"></span> Модель готова</div></div>
+      <div class="lab-grid">
+        <aside class="control-panel panel">
+          <div class="panel-heading"><div class="panel-icon">⚙</div><div><h3>Параметры системы</h3><p>Значения в условных единицах</p></div></div>
+          <form id="paramsForm">
+            <label class="field"><span>Начальная скорость <i>v₀</i></span><div class="input-wrap"><input id="v0" type="number" value="1" min="-100" max="100" step="0.1" required><span class="unit">м/с</span></div></label>
+            <label class="field"><span>Линейная жёсткость <i>α</i></span><div class="input-wrap"><input id="alpha" type="number" value="1" min="0.0001" max="1000" step="0.1" required><span class="unit">с⁻²</span></div></label>
+            <label class="field"><span>Нелинейность <i>β</i></span><div class="input-wrap"><input id="beta" type="number" value="9" min="0" max="10000" step="0.1" required><span class="unit">м⁻²с⁻²</span></div></label>
+            <div class="field-row"><label class="field"><span>Время <i>T</i></span><div class="input-wrap"><input id="duration" type="number" value="4.8" min="0.1" max="100" step="0.1" required><span class="unit">с</span></div></label><label class="field"><span>Шаг <i>Δt</i></span><div class="input-wrap"><input id="dt" type="number" value="0.01" min="0.0001" max="0.2" step="0.001" required><span class="unit">с</span></div></label></div>
+            <label class="field"><span>Численный метод</span><select id="method"><option value="verlet" selected>Velocity Verlet</option><option value="eulerCromer">Эйлер — Кромер</option><option value="richardson">Эйлер — Ричардсон</option><option value="euler">Эйлер</option></select></label>
+            <div class="method-note" id="methodNote">Хорошо сохраняет энергию в консервативных системах.</div>
+            <div id="formError" class="form-error" role="alert" hidden></div>
+            <div class="button-row"><button class="run-button" type="submit"><span>▶</span> Рассчитать</button><button class="reset-button" id="resetButton" type="button" title="Вернуть параметры по умолчанию">↺</button></div>
+          </form>
+          <div class="preset-row"><span>Быстрый пример</span><button type="button" class="preset" data-preset="book">Из учебника</button><button type="button" class="preset" data-preset="linear">β = 0</button></div>
+        </aside>
+
+        <div class="charts-area">
+          <div class="chart-toolbar"><div><h3>Графики движения</h3><p>Результат численного моделирования</p></div><button class="export-button" id="exportButton" type="button">⇩ <span>Экспорт CSV</span></button></div>
+          <div class="chart-grid">
+            <article class="chart-card"><div class="chart-title"><div><h4>Координата <i>x(t)</i></h4><span>Смещение во времени</span></div><span class="chart-dot blue-dot"></span></div><canvas id="positionChart" aria-label="График координаты от времени"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><h4>Скорость <i>v(t)</i></h4><span>Скорость во времени</span></div><span class="chart-dot violet-dot"></span></div><canvas id="velocityChart" aria-label="График скорости от времени"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><h4>Фазовый портрет</h4><span>Зависимость скорости от координаты</span></div><span class="chart-dot mint-dot"></span></div><canvas id="phaseChart" aria-label="Фазовый портрет"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><h4>Полная энергия <i>E(t)</i></h4><span>Проверка сохранения энергии</span></div><span class="chart-dot amber-dot"></span></div><canvas id="energyChart" aria-label="График энергии от времени"></canvas></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="theory" class="section-block theory-section">
+      <div class="section-heading"><div><div class="section-kicker">02 / ТЕОРИЯ</div><h2>Физическая модель</h2><p>Основа вычислений и используемые формулы.</p></div></div>
+      <div class="theory-grid">
+        <article class="theory-card equation-card"><span class="theory-number">01</span><h3>Уравнение движения</h3><div class="equation">F(x) = −kx − bx³</div><p>Сила пружины содержит линейную и кубическую составляющие. Нелинейный член становится заметнее при больших смещениях.</p><div class="equation secondary">x′ = v &nbsp; · &nbsp; v′ = −αx − βx³</div></article>
+        <article class="theory-card"><span class="theory-number">02</span><h3>Начальные условия</h3><div class="equation">x(0) = 0, &nbsp; v(0) = v₀</div><p>В начале тележка находится в положении равновесия и получает заданную начальную скорость.</p><div class="small-callout">α = k/m &nbsp;&nbsp; β = b/m</div></article>
+        <article class="theory-card"><span class="theory-number">03</span><h3>Закон сохранения энергии</h3><div class="equation">E/m = v²/2 + αx²/2 + βx⁴/4</div><p>В идеальной системе без потерь полная энергия постоянна. Отклонение энергии помогает оценить точность метода.</p><div class="small-callout">Чем меньше ошибка энергии, тем лучше сохранение интеграла движения.</div></article>
+      </div>
+      <div class="methods-strip"><div class="methods-strip-icon">∑</div><div><strong>Зачем сравнивать методы?</strong><p>Методы Эйлера, Эйлера — Кромера, Эйлера — Ричардсона и Velocity Verlet по-разному накапливают численную ошибку. При одинаковом шаге их результаты могут отличаться, особенно на длительном интервале.</p></div></div>
+    </section>
+
+    <section id="results" class="section-block results-section">
+      <div class="section-heading"><div><div class="section-kicker">03 / ДАННЫЕ</div><h2>Таблица результатов</h2><p>Первые, промежуточные и последние точки рассчитанной траектории.</p></div><div class="table-meta" id="tableMeta">— записей</div></div>
+      <div class="table-panel"><div class="table-scroll"><table><thead><tr><th>№</th><th>Время, t</th><th>Координата, x</th><th>Скорость, v</th><th>Ускорение, a</th><th>Энергия, E</th></tr></thead><tbody id="resultsBody"><tr><td colspan="6" class="empty-state">Запустите расчёт, чтобы увидеть данные.</td></tr></tbody></table></div><div class="table-footer"><span id="tableRange">Ожидание расчёта</span><button class="text-button" id="showAllButton" type="button">Показать все точки ↓</button></div></div>
+    </section>
+    <footer class="footer"><a class="brand footer-brand" href="#top"><span class="brand-mark">∿</span><span>PHYS<span class="brand-light">LAB</span></span></a><span>Интерактивная модель нелинейного осциллятора</span><a href="#top">Наверх ↑</a></footer>
+  </main>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
